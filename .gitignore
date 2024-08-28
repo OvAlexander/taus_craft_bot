@@ -1,1 +1,3 @@
 taus_craft/
+.env
+__pycache__/util.cpython-310.pyc
