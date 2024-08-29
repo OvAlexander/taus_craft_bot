@@ -12,6 +12,7 @@ def check_status() -> bool:
         Server status
     """
     try:
+        IP = os.getenv("IP")
         server = JavaServer.lookup("localhost")
         status = server.status()
         return True
@@ -55,9 +56,10 @@ def send_cmd(cmd: str):
         return_str = "Server Offline"
         return return_str
     else:
+        IP = os.getenv("IP")
         server = JavaServer.lookup("localhost")
         status = server.status()
-        with r('localhost', 'pass') as mcr:
+        with r('localhost', 'pass', 25575) as mcr:
             if cmd == "status":
                 if check_status == False:
                     return_str = "Server Offline"
