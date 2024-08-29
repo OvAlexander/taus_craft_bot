@@ -37,7 +37,9 @@ class Client(discord.Client):
             await message.reply(util.send_cmd("quit"))
 
         if msg.startswith('$modlist'):
-            modlist = util.read_md("modlist")
+            mods = "modlist_1_2"
+            util.sort_md(mods)
+            modlist = util.read_md(mods)
             await message.reply(modlist)
 
 
