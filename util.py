@@ -5,6 +5,16 @@ from mcrcon import MCRcon as r
 from mcstatus import JavaServer
 
 
+def read_md(file: str) -> str:
+    md_file = open(file, "r")
+    md_text = md_file.readlines()
+    print(md_text)
+    parsed_text = ""
+    for text in md_text:
+        parsed_text += text
+    return parsed_text
+
+
 def check_status() -> bool:
     """Checks status of server.
 
@@ -88,5 +98,6 @@ def send_cmd(cmd: str):
 
 
 if __name__ == "__main__":
-    start_server()
-    send_cmd("status")
+    print(read_md("./messages/help.md"))
+    # start_server()
+    # send_cmd("status")
