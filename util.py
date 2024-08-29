@@ -6,6 +6,7 @@ from mcstatus import JavaServer
 
 
 def read_md(file: str) -> str:
+    file = "./messages/" + file + ".md"
     md_file = open(file, "r")
     md_text = md_file.readlines()
     print(md_text)
@@ -98,6 +99,6 @@ def send_cmd(cmd: str):
 
 
 if __name__ == "__main__":
-    print(read_md("./messages/help.md"))
+    print(read_md("help"))
     # start_server()
     # send_cmd("status")
