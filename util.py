@@ -5,6 +5,17 @@ from mcrcon import MCRcon as r
 from mcstatus import JavaServer
 
 
+def sort_md(file: str):
+    file_path = "./messages/" + file + ".md"
+    new_file_path = "./messages/" + file + "_sorted.md"
+    md_file = open(file_path, "r")
+    md_text = md_file.readlines()
+    md_text.sort()
+    md_file.close()
+    sorted_md_file = open(new_file_path, "w")
+    sorted_md_file.writelines(md_text)
+
+
 def read_md(file: str) -> str:
     file = "./messages/" + file + ".md"
     md_file = open(file, "r")
@@ -99,6 +110,6 @@ def send_cmd(cmd: str):
 
 
 if __name__ == "__main__":
-    print(read_md("help"))
+    sort_md("modlist_1_2")
     # start_server()
     # send_cmd("status")
