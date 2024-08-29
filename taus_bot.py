@@ -36,6 +36,10 @@ class Client(discord.Client):
             await message.reply("Trying to stop server")
             await message.reply(util.send_cmd("quit"))
 
+        if msg.startswith('modlist'):
+            modlist = util.read_md("modlist")
+            await message.reply(modlist)
+
 
 def init():
     intents = discord.Intents.default()
