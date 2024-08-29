@@ -18,7 +18,7 @@ class Client(discord.Client):
             return
 
         if msg.startswith('$help') or msg.startswith('$h'):
-            help_str = f"""# Minecraft Server Bot Commands:\n## Format: **$main_command_name / $second_command_name**: description\n**$help / $h**: lists all avaliable bot commands\n**$server_status / $status**: Replys back with the current status of the server(Online/Offline) and lists the players online, if any.\n**$server_start / $start**: Starts the server\n**$server_save / $save**: Saves the current server state\n**$server_stop / $stop**: Automatically saves server and then shuts down server"""
+            help_str = util.read_md("help")
             await message.reply(help_str)
 
         if msg.startswith('$server_status') or msg.startswith('$status'):
