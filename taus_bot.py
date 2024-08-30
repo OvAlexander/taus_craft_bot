@@ -39,8 +39,28 @@ class Client(discord.Client):
         if msg.startswith('$modlist'):
             mods = "modlist_1_2"
             util.sort_md(mods)
-            modlist = util.read_md(mods)
-            await message.reply(modlist)
+            sorted_mods = (mods+"_sorted")
+            modlist = util.read_md(sorted_mods)
+            if len(modlist) > 2000:
+                print("chunking")
+                chunks = modlist.split('\n')
+                chunk = ""
+                for i in range(len(chunks)):
+                    print(i)
+                    if (i % 75 == 0 and i != 0) or len(chunk) > 1900 or i == len(chunks)-1:
+                        await message.channel.send(chunk)
+                        chunk = ""
+                    else:
+                        chunk += chunks[i] + "\n"
+                print(chunks)
+                print("done")
+            else:
+                await message.channel.send(modlist)
+
+        if msg.startswith('$install'):
+            rev = "1_2"
+            modpack = discord.File(f"./modpacks/TauS_Modpack_{rev}.zip")
+            await message.reply(f"Here is the current TauS Modpack Rev {rev}", file=modpack)
 
 
 def init():
