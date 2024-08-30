@@ -20,7 +20,7 @@ def read_md(file: str) -> str:
     file = "./messages/" + file + ".md"
     md_file = open(file, "r")
     md_text = md_file.readlines()
-    print(md_text)
+    md_file.close()
     parsed_text = ""
     for text in md_text:
         parsed_text += text
