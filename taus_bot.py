@@ -11,6 +11,14 @@ TOKEN = os.getenv('TOKEN')
 class Client(discord.Client):
     async def on_ready(self):
         print(f'Logged in as {self.user} (ID: {self.user.id})')
+        if util.check_status():
+            custom_activity = discord.CustomActivity(name="Server Online")
+            await discord.Client.change_presence(self=self,
+                                                 status=discord.Status.online, activity=custom_activity)
+        else:
+            custom_activity = discord.CustomActivity(name="Server Offline")
+            await discord.Client.change_presence(self=self,
+                                                 status=discord.Status.idle, activity=custom_activity)
 
     async def on_message(self, message):
         msg = message.content
@@ -20,6 +28,9 @@ class Client(discord.Client):
         if msg.startswith('$help') or msg.startswith('$h'):
             help_str = util.read_md("help")
             await message.reply(help_str)
+            custom_activity = discord.CustomActivity(name="Server Online")
+            await discord.Client.change_presence(self=self,
+                                                 status=discord.Status.online, activity=custom_activity)
 
         if msg.startswith('$server_status') or msg.startswith('$status'):
             await message.reply(util.send_cmd("status"))
@@ -27,6 +38,9 @@ class Client(discord.Client):
         if msg.startswith('$server_start') or msg.startswith('$start'):
             await message.reply("Trying to start server, Please wait for a response before entering any other commands.")
             await message.reply(util.start_server())
+            custom_activity = discord.CustomActivity(name="Server Online")
+            await discord.Client.change_presence(self=self,
+                                                 status=discord.Status.online, activity=custom_activity)
 
         if msg.startswith('$server_save') or msg.startswith('$save'):
             await message.reply("Trying to start save")
@@ -35,6 +49,10 @@ class Client(discord.Client):
         if msg.startswith('$server_stop') or msg.startswith('$stop'):
             await message.reply("Trying to stop server")
             await message.reply(util.send_cmd("quit"))
+            custom_activity = discord.CustomActivity(
+                name="Server Offline")
+            await discord.Client.change_presence(self=self,
+                                                 status=discord.Status.idle, activity=custom_activity)
 
         if msg.startswith('$modlist'):
             mods = "modlist_1_2"
