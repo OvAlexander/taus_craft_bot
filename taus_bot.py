@@ -64,7 +64,11 @@ class Client(discord.Client):
 
         if msg.startswith('$kick') and message.author.name == "0ddshadow":
             user = msg[6:]
-            util.send_cmd("kick", user)
+            await message.reply(util.send_cmd("kick", user))
+
+        if msg.startswith('$ban') and message.author.name == "0ddshadow":
+            user = msg[6:]
+            await message.reply(util.send_cmd("ban", user))
 
 
 def init():

@@ -114,6 +114,12 @@ def send_cmd(cmd: str, arg: str = None):
                 return_str = f"{arg} kicked!"
                 return return_str
 
+            if cmd == "ban":
+                print(f"Banning {arg}")
+                resp = mcr.command(f'/ban {arg}')
+                return_str = f"{arg} banned!"
+                return return_str
+
 
 if __name__ == "__main__":
     sort_md("modlist_1_2")
