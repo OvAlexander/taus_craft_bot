@@ -63,7 +63,7 @@ def start_server() -> str:
     return return_str
 
 
-def send_cmd(cmd: str):
+def send_cmd(cmd: str, arg: str = None):
     # TODO: Investigate reducing complexity of function by breaking it up.
     """Runs incoming command through mcr.
 
@@ -106,6 +106,12 @@ def send_cmd(cmd: str):
                 print("World Saved!")
                 resp = mcr.command('/stop')
                 return_str = "Server Stopped"
+                return return_str
+
+            if cmd == "kick":
+                print(f"Kicking {arg}")
+                resp = mcr.command(f'/kick {arg}')
+                return_str = f"{arg} kicked!"
                 return return_str
 
 

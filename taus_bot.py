@@ -62,6 +62,10 @@ class Client(discord.Client):
             modpack = discord.File(f"./modpacks/TauS_Modpack_{rev}.zip")
             await message.reply(f"Here is the current TauS Modpack Rev {rev}", file=modpack)
 
+        if msg.startswith('$kick') and message.author.name == "0ddshadow":
+            user = msg[6:]
+            util.send_cmd("kick", user)
+
 
 def init():
     intents = discord.Intents.default()
