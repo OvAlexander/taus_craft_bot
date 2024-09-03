@@ -58,18 +58,14 @@ class Client(discord.Client):
             sorted_mods = (mods+"_sorted")
             modlist = util.read_md(sorted_mods)
             if len(modlist) > 2000:
-                print("chunking")
                 chunks = modlist.split('\n')
                 chunk = ""
                 for i in range(len(chunks)):
-                    print(i)
                     if (i % 75 == 0 and i != 0) or len(chunk) > 1900 or i == len(chunks)-1:
                         await message.channel.send(chunk)
                         chunk = ""
                     else:
                         chunk += chunks[i] + "\n"
-                print(chunks)
-                print("done")
             else:
                 await message.channel.send(modlist)
 
