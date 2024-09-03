@@ -3,9 +3,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 import os
 import util
-
-load_dotenv()
-TOKEN = os.getenv('TOKEN')
+from common import TOKEN, IP
 
 
 class Client(discord.Client):

@@ -3,6 +3,7 @@ import os
 import subprocess
 from mcrcon import MCRcon as r
 from mcstatus import JavaServer
+from common import DIR_PATH, FILE_PATH
 
 
 def sort_md(file: str):
@@ -34,7 +35,6 @@ def check_status() -> bool:
         Server status
     """
     try:
-        IP = os.getenv("IP")
         server = JavaServer.lookup("localhost")
         status = server.status()
         return True
@@ -53,8 +53,6 @@ def start_server() -> str:
         return_str = "Server Already Running!"
     else:
         load_dotenv()
-        DIR_PATH = os.getenv(r'DIR_PATH')
-        FILE_PATH = os.getenv('FILE_PATH')
 
         print("Starting Server...")
         os.chdir(DIR_PATH)
@@ -78,7 +76,6 @@ def send_cmd(cmd: str, arg: str = None):
         return_str = "Server Offline"
         return return_str
     else:
-        IP = os.getenv("IP")
         server = JavaServer.lookup("localhost")
         status = server.status()
         with r('localhost', 'pass', 25575) as mcr:
