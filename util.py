@@ -3,12 +3,12 @@ import os
 import subprocess
 from mcrcon import MCRcon as r
 from mcstatus import JavaServer
-from common import DIR_PATH, FILE_PATH
+from common import SERVER_DIR_PATH, FILE_PATH, DIR_PATH
 
 
 def sort_md(file: str):
-    file_path = "./messages/" + file + ".md"
-    new_file_path = "./messages/" + file + "_sorted.md"
+    file_path = f"{DIR_PATH}/messages/{file}.md"
+    new_file_path = f"{DIR_PATH}/messages/{file}_sorted.md"
     md_file = open(file_path, "r")
     md_text = md_file.readlines()
     md_text.sort()
@@ -18,7 +18,7 @@ def sort_md(file: str):
 
 
 def read_md(file: str) -> str:
-    file = "./messages/" + file + ".md"
+    file = f"{DIR_PATH}/messages/{file}.md"
     md_file = open(file, "r")
     md_text = md_file.readlines()
     md_file.close()
@@ -55,7 +55,7 @@ def start_server() -> str:
         load_dotenv()
 
         print("Starting Server...")
-        os.chdir(DIR_PATH)
+        os.chdir(SERVER_DIR_PATH)
         subprocess.Popen(["start", "cmd", "/k", FILE_PATH], shell=True)
         return_str = "Server Started! Wait a ~30 seconds for the server to fully boot up."
     return return_str
