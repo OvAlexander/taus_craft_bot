@@ -1,4 +1,4 @@
-ENV = False  # Enables using .env file
+ENV = True  # Enables using .env file
 
 TOKEN = ""  # Discord API Token
 FILE_PATH = ""  # Filepath to server bat file
