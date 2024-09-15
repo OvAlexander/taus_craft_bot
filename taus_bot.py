@@ -3,11 +3,13 @@ from discord.ext import commands
 from dotenv import load_dotenv
 import os
 import util
+from util import log
 from common import TOKEN, IP, CHANNEL_ID, NOTI_LIST
 import asyncio
 
 
 class Client(discord.Client):
+
     async def setup_hook(self) -> None:
         # create the background task and run it in the background
         self.bg_task = self.loop.create_task(self.check_channel())
@@ -26,9 +28,9 @@ class Client(discord.Client):
                 name = memeber.name
                 if name not in new_names:
                     new_names.append(name)
-                # print(old_names)
+                log(old_names)
                 if name not in old_names:
-                    # print("appended")
+                    log("appended")
                     old_names.append(name)
 
                     if name in NOTI_LIST:
@@ -39,27 +41,25 @@ class Client(discord.Client):
                             await user.create_dm()
             if not first:
                 if counter == 2:
-                    # print("Counter Reset")
+                    log("Counter Reset")
                     for name in old_names:
                         if name not in new_names:
                             old_names.remove(name)
-                            # print(f"Removed {name}")
+                            log(f"Removed {name}")
                     counter = 0
             else:
                 old_names = new_names
-                # print(old_names)
+                log(old_names)
                 first = False
-            # print(
-            #     f"\n\n{'-'*20}\nOld names: {old_names}\nNew Names: {new_names}\n{'-'*20}\n")
+            log(f"\n\n{'-'*20}\nOld names: {old_names}\nNew Names: {new_names}\n{'-'*20}\n")
             counter += 1
-            # print(f"{'-'*20}\nClearing new names")
+            log(f"{'-'*20}\nClearing new names")
             new_names = []
-            # print(
-            #     f"Old names: {old_names}\nNew Names: {new_names}\nCounter: {counter}\n{'-'*20}")
+            log(f"Old names: {old_names}\nNew Names: {new_names}\nCounter: {counter}\n{'-'*20}")
             await asyncio.sleep(30)  # task runs every 60 seconds
 
     async def on_ready(self):
-        print(f'Logged in as {self.user} (ID: {self.user.id})')
+        log(f'Logged in as {self.user} (ID: {self.user.id})')
         if util.check_status():
             custom_activity = discord.CustomActivity(name="Server Online")
             await discord.Client.change_presence(self=self,

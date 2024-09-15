@@ -3,7 +3,6 @@ from setup import ENV, TOKEN, IP, SERVER_DIR_PATH, FILE_PATH
 import os
 
 DIR_PATH = os.getcwd()
-
 if ENV:
     load_dotenv()
     TOKEN = os.getenv('TOKEN')

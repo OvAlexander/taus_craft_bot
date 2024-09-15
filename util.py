@@ -4,6 +4,12 @@ import subprocess
 from mcrcon import MCRcon as r
 from mcstatus import JavaServer
 from common import SERVER_DIR_PATH, FILE_PATH, DIR_PATH
+from setup import LOGGING
+
+
+def log(*args, **kwargs):
+    if LOGGING:
+        print(*args, **kwargs)
 
 
 def sort_md(file: str):

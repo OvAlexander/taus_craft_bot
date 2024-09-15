@@ -1,5 +1,5 @@
 ENV = True  # Enables using .env file
-
+LOGGING = True
 TOKEN = ""  # Discord API Token
 FILE_PATH = ""  # Filepath to server bat file
 SERVER_DIR_PATH = ""  # Filepath to server directory
