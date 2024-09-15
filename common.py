@@ -10,6 +10,8 @@ if ENV:
     IP = os.getenv("IP")
     SERVER_DIR_PATH = os.getenv(r'SERVER_DIR_PATH')
     FILE_PATH = os.getenv('FILE_PATH')
+    CHANNEL_ID = os.getenv('CHANNEL_ID')
+    NOTI_LIST = os.getenv('NOTI_LIST')
 
 else:
     TOKEN = TOKEN
